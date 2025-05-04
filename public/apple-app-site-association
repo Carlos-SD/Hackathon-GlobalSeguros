@@ -1,0 +1,24 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "ABCDE12345.com.example.segurapp",
+        "paths": [
+          "/movilidad*",
+          "/asistente*",
+          "/vitalidad*",
+          "/configuracion*",
+          "/share-target*",
+          "NOT /api/*"
+        ]
+      }
+    ]
+  },
+  "webcredentials": {
+    "apps": ["ABCDE12345.com.example.segurapp"]
+  },
+  "appclips": {
+    "apps": ["ABCDE12345.com.example.segurapp.Clip"]
+  }
+}
