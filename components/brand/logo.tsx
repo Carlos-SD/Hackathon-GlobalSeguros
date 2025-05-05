@@ -1,30 +1,25 @@
-import Image from "next/image"
-import Link from "next/link"
+import { Shield } from "lucide-react"
 
 interface LogoProps {
-  variant?: "default" | "white"
   size?: "sm" | "md" | "lg"
 }
 
-export function Logo({ variant = "default", size = "md" }: LogoProps) {
-  const logoSrc = variant === "white" ? "/images/logo-white.png" : "/images/logo.png"
-
+export function Logo({ size = "md" }: LogoProps) {
   const sizeClasses = {
-    sm: "h-6",
-    md: "h-8",
-    lg: "h-12",
+    sm: "h-7",
+    md: "h-10",
+    lg: "h-14",
   }
 
   return (
-    <Link href="/" className="flex items-center">
-      <Image
-        src={logoSrc || "/placeholder.svg"}
-        alt="GlobalSeguros"
-        width={size === "lg" ? 240 : size === "md" ? 180 : 120}
-        height={size === "lg" ? 60 : size === "md" ? 40 : 30}
-        className={`${sizeClasses[size]} w-auto`}
-        priority
-      />
-    </Link>
+    <div className="flex items-center gap-2">
+      <div className="bg-primary rounded-full p-2">
+        <Shield className={`text-primary-foreground ${sizeClasses[size]}`} />
+      </div>
+      <div className="font-bold">
+        <div className="text-primary leading-none">Segurito</div>
+        <div className="text-muted-foreground text-sm leading-none">Bacanito</div>
+      </div>
+    </div>
   )
 }

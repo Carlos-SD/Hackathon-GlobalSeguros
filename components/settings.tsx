@@ -1,16 +1,22 @@
 "use client"
 
+import { useState } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Bell, SettingsIcon, Smartphone, Watch } from "lucide-react"
+import { Bell, SettingsIcon, Smartphone, Watch, Car } from "lucide-react"
 import { Switch } from "@/components/ui/switch"
 import { Label } from "@/components/ui/label"
+import { Slider } from "@/components/ui/slider"
+import { Input } from "@/components/ui/input"
 import { useSpeedDetection } from "@/lib/speed-detection-provider"
 import { useToast } from "@/components/ui/use-toast"
+import { Logo } from "@/components/brand/logo"
 
 export function Settings() {
-  const { isSpeedDetectionEnabled, toggleSpeedDetection } = useSpeedDetection()
+  const { isSpeedDetectionEnabled, toggleSpeedDetection, speedThreshold, setSpeedThreshold } = useSpeedDetection()
   const { toast } = useToast()
+  const [startSpeed, setStartSpeed] = useState(speedThreshold)
+  const [stopSpeed, setStopSpeed] = useState(speedThreshold / 2)
 
   const handleToggleDetection = () => {
     toggleSpeedDetection()
@@ -22,11 +28,22 @@ export function Settings() {
     })
   }
 
+  const handleSaveThresholds = () => {
+    setSpeedThreshold(startSpeed)
+    toast({
+      title: "Umbrales actualizados",
+      description: `Umbral de inicio: ${startSpeed} km/h, Umbral de fin: ${stopSpeed} km/h`,
+    })
+  }
+
   return (
     <div className="container p-4 space-y-4">
-      <div>
-        <h1 className="text-2xl font-bold">Mi Ecosistema</h1>
-        <p className="text-muted-foreground text-sm">Configuración de la aplicación</p>
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-2xl font-bold">Mi Ecosistema</h1>
+          <p className="text-muted-foreground text-sm">Configuración de la aplicación</p>
+        </div>
+        <Logo size="sm" />
       </div>
 
       <Card>
@@ -78,6 +95,78 @@ export function Settings() {
               Conectar
             </Button>
           </div>
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardHeader className="pb-2">
+          <CardTitle className="flex items-center gap-2 text-lg">
+            <Car className="h-5 w-5 text-primary" />
+            Umbrales de Velocidad
+          </CardTitle>
+          <CardDescription>Configuración para la detección de viajes</CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="space-y-2">
+            <Label htmlFor="start-speed" className="font-medium text-sm">
+              Velocidad de inicio de viaje ({startSpeed} km/h)
+            </Label>
+            <div className="flex items-center gap-2">
+              <Slider 
+                id="start-speed"
+                min={5} 
+                max={30} 
+                step={1}
+                value={[startSpeed]}
+                onValueChange={(value) => setStartSpeed(value[0])}
+              />
+              <Input 
+                type="number" 
+                min={5}
+                max={30}
+                value={startSpeed}
+                onChange={(e) => setStartSpeed(Number(e.target.value))}
+                className="w-16"
+              />
+            </div>
+            <p className="text-xs text-muted-foreground">
+              Un viaje comenzará automáticamente cuando superes esta velocidad.
+            </p>
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="stop-speed" className="font-medium text-sm">
+              Velocidad de fin de viaje ({stopSpeed} km/h)
+            </Label>
+            <div className="flex items-center gap-2">
+              <Slider 
+                id="stop-speed"
+                min={1} 
+                max={15} 
+                step={1}
+                value={[stopSpeed]}
+                onValueChange={(value) => setStopSpeed(value[0])}
+              />
+              <Input 
+                type="number" 
+                min={1}
+                max={15}
+                value={stopSpeed}
+                onChange={(e) => setStopSpeed(Number(e.target.value))}
+                className="w-16"
+              />
+            </div>
+            <p className="text-xs text-muted-foreground">
+              Un viaje terminará automáticamente cuando estés por debajo de esta velocidad por 2 minutos.
+            </p>
+          </div>
+
+          <Button 
+            onClick={handleSaveThresholds}
+            className="w-full mt-2"
+          >
+            Guardar configuración
+          </Button>
         </CardContent>
       </Card>
 

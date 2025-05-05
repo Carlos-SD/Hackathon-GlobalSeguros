@@ -1,6 +1,6 @@
 "use client"
 
-import { Home, MessageSquareText, Settings, ShieldAlert, Car } from "lucide-react"
+import { Home, MessageSquareText, Settings, ShieldAlert, Car, Activity } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
@@ -17,9 +17,9 @@ export function MobileNavigation() {
       url: "/",
     },
     {
-      title: "Seguros",
-      icon: ShieldAlert,
-      url: "/seguros",
+      title: "Vitalidad",
+      icon: Activity,
+      url: "/vitalidad",
     },
     {
       title: "Movilidad",
