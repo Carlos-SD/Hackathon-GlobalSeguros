@@ -1,3 +1,5 @@
+// Este archivo maneja la integración con asistentes de voz nativos
+
 import { processAssistantQuery, type AssistantQuery } from "./assistant-service"
 
 // Interfaz para manejar comandos de voz desde asistentes nativos

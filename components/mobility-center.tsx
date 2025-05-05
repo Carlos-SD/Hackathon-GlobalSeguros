@@ -158,7 +158,7 @@ export function MobilityCenter() {
               tripHistory.map((trip, index) => (
                 <TripHistoryItem
                   key={index}
-                  date={new Date(trip.endTime).toLocaleString()}
+                  date={trip.endTime.toString()}
                   distance={`${trip.distance.toFixed(1)} km`}
                   duration={`${Math.round(trip.duration / 60)} min`}
                   score={trip.score}

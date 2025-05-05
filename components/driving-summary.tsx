@@ -3,11 +3,25 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Car, Clock, MapPin } from "lucide-react"
 import { useSpeedDetection } from "@/lib/speed-detection-provider"
+import { useMemo } from "react"
 
 export function DrivingSummary() {
   const { tripHistory } = useSpeedDetection()
 
   const lastTrip = tripHistory.length > 0 ? tripHistory[0] : null
+
+  // Formatear la fecha de manera consistente entre servidor y cliente
+  const formattedDate = useMemo(() => {
+    if (!lastTrip) return "Sin viajes recientes";
+    
+    // En el servidor, usar una cadena fija para evitar errores de hidratación
+    if (typeof window === 'undefined') {
+      return "Último viaje registrado";
+    }
+    
+    // En el cliente, formatear la fecha normalmente
+    return `Último viaje: ${new Date(lastTrip.endTime).toLocaleString()}`;
+  }, [lastTrip]);
 
   return (
     <Card>
@@ -17,7 +31,7 @@ export function DrivingSummary() {
           Resumen de Conducción
         </CardTitle>
         <CardDescription>
-          {lastTrip ? `Último viaje: ${new Date(lastTrip.endTime).toLocaleString()}` : "Sin viajes recientes"}
+          {formattedDate}
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">

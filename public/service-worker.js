@@ -1,3 +1,5 @@
+// Service Worker para manejar notificaciones push y comandos de voz en segundo plano
+
 self.addEventListener("install", (event) => {
   self.skipWaiting()
 })

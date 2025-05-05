@@ -1,3 +1,5 @@
+// Este archivo maneja la integración con la búsqueda del dispositivo
+
 import { processAssistantQuery, type AssistantQuery } from "./assistant-service"
 
 // Interfaz para manejar consultas desde la búsqueda del dispositivo

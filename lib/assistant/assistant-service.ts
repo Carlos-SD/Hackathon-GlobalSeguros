@@ -1,3 +1,5 @@
+// Este servicio maneja la lógica del asistente virtual y expone métodos para ser llamados desde fuera de la app
+
 import { collection, addDoc, query, orderBy, getDocs } from "firebase/firestore"
 import { db } from "../firebase/firebase-config"
 import { insuranceTypes } from "../services/insurance-service"

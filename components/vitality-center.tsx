@@ -2,13 +2,17 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Activity, Calendar, Heart, TrendingUp } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Logo } from "@/components/brand/logo"
 
 export function VitalityCenter() {
   return (
     <div className="container p-4 space-y-4">
-      <div>
-        <h1 className="text-2xl font-bold">Centro de Vitalidad</h1>
-        <p className="text-muted-foreground text-sm">Monitoreo de salud y bienestar</p>
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-2xl font-bold">Centro de Vitalidad</h1>
+          <p className="text-muted-foreground text-sm">Monitoreo de salud y bienestar</p>
+        </div>
+        <Logo size="sm" />
       </div>
 
       <Tabs defaultValue="diario" className="w-full">
