@@ -49,8 +49,11 @@ export default function RootLayout({
         <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png" />
         <link rel="manifest" href="/manifest.json" />
         <link rel="mask-icon" href="/icons/safari-pinned-tab.svg" color="#003087" />
+        {/* Meta tag para desactivar extensiones de navegador que puedan causar problemas de hidratación */}
+        <meta name="web-page-annotation" content="no"/>
       </head>
-      <body className={inter.className}>
+      {/* Usamos suppressHydrationWarning en el body también para evitar errores con atributos añadidos por extensiones */}
+      <body className={inter.className} suppressHydrationWarning>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
           <FirebaseProvider>
             <SpeedDetectionProvider>

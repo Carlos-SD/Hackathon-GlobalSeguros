@@ -54,7 +54,7 @@ export function Dashboard() {
   }
 
   return (
-    <div className="container px-4 py-6 space-y-6">
+    <div className="container p-4 space-y-6">
       {/* Cabecera con logo */}
       <div className="flex items-center justify-between mb-2">
         <h1 className="text-2xl font-bold">Panel Principal</h1>
