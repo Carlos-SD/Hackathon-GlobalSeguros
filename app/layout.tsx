@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     // Manifest para PWA
     manifest: "/manifest.json",
   },
-    generator: 'v0.dev'
+  generator: 'Global Seguros'
 }
 
 export default function RootLayout({
